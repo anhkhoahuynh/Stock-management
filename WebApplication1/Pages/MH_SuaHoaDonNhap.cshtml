@@ -1,0 +1,53 @@
+﻿@page
+@model QLSP.Pages.MH_SuaHoaDonNhapModel
+@{
+}
+
+@using QLSP.Entities;
+
+
+<form method="POST">
+    <table>
+          <tr>
+            <td><label for="MaHoaDonNhapCanSua" class="text-primary fw-bolder">Mã hóa đơn nhập</label><input type="text" class="mx-3" readonly name="MaHoaDonNhapCanSua"
+                value="@Model.HoaDonNhapCanSua.MaHoaDonNhap"/></td>
+            <td><label for="NgayTaoHoaDonNhapCanSua" class="text-primary fw-bolder">Ngày tạo hóa đơn nhập</label><input type="date" class="mx-3" name="NgayTaoHoaDonNhapCanSua"
+                value="@Model.HoaDonNhapCanSua.NgayTaoHoaDonNhap.ToString("yyyy-MM-dd")"/></td>
+         </tr>
+     </table>
+     <table>
+         <tr>
+             <th>STT</th>
+             <th>Mã sản phẩm - Tên sản phẩm</th>
+             <th>Số lượng</th>
+             <th>Thao tác</th>
+         </tr>
+         @for(int i=0; i<@Model.HoaDonNhapCanSua.ChiTietHoaDon.Length; i++)
+        {
+            <tr>
+             <th><input type="text" value="@(@i+1)" readonly/></th>
+             <th>
+             <select name="@Model.HoaDonNhapCanSua.ChiTietHoaDon[i].MaSanPham" value="@Model.HoaDonNhapCanSua.ChiTietHoaDon[i].MaSanPham">
+                  <option value="@Model.HoaDonNhapCanSua.ChiTietHoaDon[i].MaSanPham">@Model.HoaDonNhapCanSua.ChiTietHoaDon[i].MaSanPham - @Model.HoaDonNhapCanSua.ChiTietHoaDon[i].TenSanPham</option>
+                 @for (int j=0; j< @Model.DanhSachSanPham.Length; j++)
+                    {
+                        if(@Model.DanhSachSanPham[j].MaSanPham == @Model.HoaDonNhapCanSua.ChiTietHoaDon[i].MaSanPham)
+                        {
+                                continue;
+                        }
+                        else
+                        {  
+                            <option value="@Model.DanhSachSanPham[j].MaSanPham">@Model.DanhSachSanPham[j].MaSanPham - @Model.DanhSachSanPham[j].TenSanPham</option>
+                        }
+                    }
+                </select>
+             </th>
+             <th><input type="number" value="@Model.HoaDonNhapCanSua.ChiTietHoaDon[i].SoLuong" /></th>
+         </tr>
+        }
+      </table>
+      <tr>
+           <th> <input type="submit" class="btn btn-primary w-20" value="Sửa"/></th>
+       </tr>
+ </form>
+ 

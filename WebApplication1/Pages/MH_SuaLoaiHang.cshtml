@@ -1,0 +1,18 @@
+﻿@page
+@model QLSP.Pages.MH_SuaLoaiHangModel
+@{
+}
+
+@Model.ChuoiThongBao
+
+<form method="POST">
+
+  <label for="MaLoaiHangCanSua">Mã loại hàng:</label><br>
+  <input type="text" id="MaLoaiHangCanSua" name="MaLoaiHangCanSua" value="@Model.LoaiHangCanSua.MaLoaiHang"><br>
+
+  <label for="TenLoaiHangCanSua">Tên sản phẩm:</label><br>
+  <input type="text" id="TenLoaiHangCanSua" name="TenLoaiHangCanSua" value="@Model.LoaiHangCanSua.TenLoaiHang"><br>
+
+  <input type="submit" value="Sửa"/>
+
+</form>

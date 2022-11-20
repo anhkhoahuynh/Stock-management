@@ -1,0 +1,46 @@
+﻿
+
+@page
+@model QLSP.Pages.MH_TaoHoaDonNhaplModel
+ <form method="POST">
+    <table>
+          <tr>
+            <td><label for="NgayTaoHoaDonX" class="text-primary fw-bolder">Ngày tạo hóa đơn nhập</label><input type="date" class="mx-3" name="NgayTaoHoaDonX" /></td>
+            <td><label></label><button id="addRow" type="button" class="btn btn-secondary py-1 me-3">Thêm hóa đơn bán</button></td>
+         </tr>
+     </table>
+         
+     <div id="newRow">
+         <input type="hidden" id="total" value="0" />
+     </div>
+     </br><input type="submit" class="btn btn-success"  value="Tạo hóa đơn bán" />
+ </form>
+ 
+ @section Scripts
+ {
+     <script>
+     $("#addRow").click(function ()
+     {
+         var rowCount = parseInt($("#total").val());
+         rowCount++;
+         $("#total").val(rowCount);
+         var html = '';
+         html += '<div id="inputRow" class="my-3"><table>';
+         html += '<tr><td class="w-10"><label class="text-secondary">STT</label><br/><input type="text" value="' + (rowCount - 1) + '"  readonly class="me-3 w-2"/></td>';
+         html += '<td class="w-100"><label class="text-secondary">Mã sản phẩm - Tên sản phẩm</label><br/><select class="py-1 w-100" id="ChiTietHoaDonNhapX[' + (rowCount - 1) + '].MaSanPham" name="ChiTietHoaDonNhapX[' + (rowCount - 1) + '].MaSanPham" class="me-3">@for (int i=0; i< @Model.DanhSachSanPham.Length; i++)
+         {<option value="@Model.DanhSachSanPham[i].MaSanPham">@Model.DanhSachSanPham[i].MaSanPham - @Model.DanhSachSanPham[i].TenSanPham</option>}</select></td>';
+         html += '<td class="w-50"><label class="ms-3 text-secondary">Số lượng (Nhập -1 để xóa dòng)</label><br/><input type="text" id="ChiTietHoaDonNhapX[' + (rowCount - 1) + '].SoLuong" name="ChiTietHoaDonNhapX[' + (rowCount - 1) + '].SoLuong"  class="me-3 ms-3"/></td>';
+         
+         html += '</tr><table></div>';
+         $('#newRow').append(html);
+         event.preventDefault();
+     });
+     $(document).on('click', '#removeRow', function ()
+     {
+         var rowCount = parseInt($("#total").val());
+         $("#total").val(rowCount);
+         $(this).closest('#inputRow').hide();
+        
+     });
+     </script>
+ }

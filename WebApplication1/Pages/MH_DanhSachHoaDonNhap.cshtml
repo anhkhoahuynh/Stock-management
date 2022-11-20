@@ -1,0 +1,75 @@
+﻿@page
+@model QLSP.Pages.MH_DanhSachHoaDonNhapModel
+@using QLSP.Entities;
+
+
+
+<h1>Tim kiem</h1>
+
+<h1>Danh Sách Hóa Đơn Nhập</h1>
+<table class="table table-striped table-hover  align-middle col">
+    <tr>
+        <td class="col-6">
+            <h5>Tìm kiếm</h5>
+            <form method="POST">
+            <input type="text" class="form-control w-100" name="keyword" id="keyword" placeholder="Nhập từ khóa cần tìm kiếm">
+            <button type="submit" class="btn btn-primary w-40 mt-2">Tìm kiếm theo mã hóa đơn</button>
+            </form>
+        </td>
+        <td class="col-6">
+            <button type="button" onclick="location.href='\MH_TaoHoaDonNhap';" class="btn btn-success w-40 mt-2 float-end">
+            Thêm hóa đơn nhập</button>
+        </td>
+    </tr>
+</table>
+
+
+<div class="table-responsive">
+<table class="table table-hover border-black table-success align-middle col table-bordered">
+    <thead class="table-light py-2">
+            <caption></caption>
+            <tr class="py-5 h-100">
+                <th>Mã hóa đơn</th>
+                <th>Ngày tạo hóa đơn</th>
+                <th>Mã sản phẩm</th>
+                <th>Tên sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Giá/đơn vị</th>
+                <th>Thành tiền</th>
+                <th>Tổng cộng</th>
+                <th colspan="2">Thao tác</th>
+            </tr>
+            </thead>
+    
+        @for(int i=0; i<@Model.DanhSachHoaDonNhap.Length; i++)
+        {
+                <tr class="table-light">
+                <td rowspan="@Model.DanhSachHoaDonNhap[i].ChiTietHoaDon.Length">@Model.DanhSachHoaDonNhap[i].MaHoaDonNhap</td>
+                <td rowspan="@Model.DanhSachHoaDonNhap[i].ChiTietHoaDon.Length">@Model.DanhSachHoaDonNhap[i].NgayTaoHoaDonNhap.ToString("dd/MM/yyyy")</td>
+                    @for(int j=0; j<1; j++)
+                    {
+                        <td>@Model.DanhSachHoaDonNhap[i].ChiTietHoaDon[j].MaSanPham</td>
+                        <td>@Model.DanhSachHoaDonNhap[i].ChiTietHoaDon[j].TenSanPham</td>
+                        <td>@Model.DanhSachHoaDonNhap[i].ChiTietHoaDon[j].SoLuong</td>
+                        <td>@Model.DanhSachHoaDonNhap[i].ChiTietHoaDon[j].Gia</td>
+                        <td>@Model.DanhSachHoaDonNhap[i].ChiTietHoaDon[j].ThanhTien</td>
+                    }
+                <td rowspan="@Model.DanhSachHoaDonNhap[i].ChiTietHoaDon.Length">@Model.DanhSachHoaDonNhap[i].TongGiaTriHoaDonNhap</td>
+                <td rowspan="@Model.DanhSachHoaDonNhap[i].ChiTietHoaDon.Length"><button type="submit" class="btn btn-primary w-100" onclick="location.href = '/MH_SuaHoaDonNhap?MaHoaDonNhapCanSua=@Model.DanhSachHoaDonNhap[i].MaHoaDonNhap';">Sửa</button></td>
+                <td rowspan="@Model.DanhSachHoaDonNhap[i].ChiTietHoaDon.Length"><button type="submit" class="btn btn-danger w-100" onclick="location.href = '/MH_XoaHoaDonNhap?MaHoaDonNhapCanXoa=@Model.DanhSachHoaDonNhap[i].MaHoaDonNhap';">Xóa</button></td> 
+                </tr>
+                
+                    @for(int j=1; j<@Model.DanhSachHoaDonNhap[i].ChiTietHoaDon.Length; j++)
+                    {
+                        <tr class="table-light">
+                        <td>@Model.DanhSachHoaDonNhap[i].ChiTietHoaDon[j].MaSanPham</td>
+                        <td>@Model.DanhSachHoaDonNhap[i].ChiTietHoaDon[j].TenSanPham</td>
+                        <td>@Model.DanhSachHoaDonNhap[i].ChiTietHoaDon[j].SoLuong</td>
+                        <td>@Model.DanhSachHoaDonNhap[i].ChiTietHoaDon[j].Gia</td>
+                        <td>@Model.DanhSachHoaDonNhap[i].ChiTietHoaDon[j].ThanhTien</td>
+                        </tr>
+                    }
+        }
+    
+</table>
+</div>

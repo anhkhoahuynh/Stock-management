@@ -1,0 +1,50 @@
+﻿@page
+@model QLSP.Pages.MH_SuaSanPhamModel
+@{
+}
+@using QLSP.Entities;
+
+
+
+<form method="POST">
+   <table>
+       <tr>
+           <th>Mã sản phẩm</th>
+           <th>Tên sản phẩm</th>
+           <th>Hạn sử dụng</th>
+           <th>Ngày sản xuất</th>
+           <th>Nhà sản xuất</th>
+           <th>Mã loại hàng</th>
+           <th>Giá</th>
+       </tr>
+       <tr>
+           <th><input type="text" id="MaSanPhamCanSua" name="MaSanPhamCanSua" value="@Model.SanPhamCanSua.MaSanPham" readonly></th>
+           <th><input type="text" id="TenSanPhamCanSua" name="TenSanPhamCanSua" value="@Model.SanPhamCanSua.TenSanPham"></th>
+           <th><input type="date" id="HanSuDungCanSua" name="HanSuDungCanSua" value="@Model.SanPhamCanSua.HanSuDung.ToString("yyyy-MM-dd")"></th>
+           <th><input type="date" id="NgaySanXuatCanSua" name="NgaySanXuatCanSua" value="@Model.SanPhamCanSua.NgaySanXuat.ToString("yyyy-MM-dd")"></th>
+           <th><input type="text" id="NhaSanXuatCanSua" name="NhaSanXuatCanSua" value="@Model.SanPhamCanSua.NhaSanXuat"></th>
+           <th>
+             <select name="MaLoaiHangCanSua" id="MaLoaiHangCanSua">
+                 <option value="@Model.SanPhamCanSua.LoaiHang.MaLoaiHang">@Model.SanPhamCanSua.LoaiHang.MaLoaiHang - @Model.SanPhamCanSua.LoaiHang.TenLoaiHang</option>
+                @foreach (LoaiHang LoaiHangX in Model.DanhSachLoaiHang)
+                    {
+                        if(LoaiHangX.MaLoaiHang ==@Model.SanPhamCanSua.LoaiHang.MaLoaiHang)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            
+                        <option value="@LoaiHangX.MaLoaiHang">@LoaiHangX.MaLoaiHang - @LoaiHangX.TenLoaiHang</option>
+                        }
+                    }
+                </select</th>
+           <th><input type="number" step="any" min=0 id="Gia" name="GiaCanSua" value="@Model.SanPhamCanSua.Gia"></th>
+           <th><input type="text" id="TonKhoCanSua" name="TonKhoCanSua" value="@Model.SanPhamCanSua.SoLuongTonKho" readonly></th>
+       </tr>
+       <tr>
+           <th> <input type="submit" class="btn btn-primary w-20" value="Sửa"/></th>
+       </tr>
+   </table>
+ 
+</form>

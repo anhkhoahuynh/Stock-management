@@ -1,0 +1,70 @@
+﻿@page
+@model QLSP.Pages.MH_DanhSachSanPhamModel
+@using QLSP.Entities;
+
+
+
+<h1>Danh Sách Sản Phẩm</h1>
+<table class="table table-striped table-hover  align-middle col">
+    <tr>
+        <td class="col-6">
+            <h5>Tìm kiếm</h5>
+            <form method="POST">
+            <input type="text" class="form-control w-100" name="keyword" id="keyword" placeholder="Nhập từ khóa cần tìm kiếm">
+            <button type="submit" class="btn btn-primary w-40 mt-2">Tìm kiếm theo tên sản phẩm</button>
+            </form>
+        </td>
+        <td class="col-6">
+            <button type="button" onclick="location.href='\MH_TaoSanPham';" class="btn btn-success w-40 mt-2 float-end">
+            Thêm sản phẩm</button>
+        </td>
+    </tr>
+</table>
+
+
+
+
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover border-black table-success align-middle col table-bordered">
+        <thead class="table-light py-2">
+            <caption></caption>
+            <tr class="py-5 h-100">
+                <th>Mã sản phẩm</th>
+                <th>Tên sản phẩm</th>
+                <th>Hạn sử dụng</th>
+                <th>Ngày sản xuất</th>
+                <th>Nhà sản phẩm</th>
+                <th>Mã loại hàng - Tên loại hàng</th>
+                <th>Giá</th>
+                <th>Tồn kho</th>
+                <th colspan="2">Thao tác</th>
+            </tr>
+            </thead>
+            <tbody class="table-group-divider ">
+                 @foreach (SanPham SanPhamX in Model.DanhSachSanPham)
+                    {
+                        <tr class="table-light" >
+                            <td scope="row">@SanPhamX.MaSanPham</td>
+                            <td>@SanPhamX.TenSanPham</td>
+                            <td>@SanPhamX.HanSuDung.ToString("dd/MM/yyyy")</td>
+                            <td>@SanPhamX.NgaySanXuat.ToString("dd/MM/yyyy")</td>
+                            <td>@SanPhamX.NhaSanXuat</td>
+                            <td>@SanPhamX.LoaiHang.MaLoaiHang - @SanPhamX.LoaiHang.TenLoaiHang</td>
+                            <td>@SanPhamX.Gia</td>
+                            <td>@SanPhamX.SoLuongTonKho</td>
+                                <td>
+                                     <button type="submit" class="btn btn-primary w-100" onclick="location.href = '/MH_SuaSanPham?MaSanPhamCanSua=@SanPhamX.MaSanPham';">Sửa</button>
+                                </td>
+                                <td>
+                                <button type="submit" class="btn btn-danger w-100" onclick="location.href = '/MH_XoaSanPham?MaSanPhamCanXoa=@SanPhamX.MaSanPham';">Xóa</button>
+                                </td> 
+                            
+                        </tr>
+                    }
+            </tbody>
+            <tfoot>
+                
+            </tfoot>
+    </table>
+</div>

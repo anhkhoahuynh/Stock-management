@@ -1,0 +1,50 @@
+﻿@page
+@model QLSP.Pages.MH_DanhSachLoaiHangModel
+@using QLSP.Entities;
+
+
+@Model.DanhSachLoaiHang
+
+<h1>Tim kiem</h1>
+
+<form method="POST">
+<div class="mb-3">
+  <label for="keyword" class="form-label">Nhập từ khóa cần tìm kiếm/label>
+  <input type="text"
+    class="form-control" name="keyword" id="keyword" placeholder="keyword">q
+</div>
+<button type="submit" class="btn btn-primary">Tim kiem</button>
+</form>
+
+<div>
+    <a href="/MH_TaoLoaiHang">Thêm loại hàng</a>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover border-black table-primary align-middle">
+        <thead class="table-light">
+            <caption>Danh sách loại hàng</caption>
+            <tr>
+                <th>Mã loại hàng</th>
+                <th>Tên loại hàng</th>
+                <th>Thao tác</th>
+            </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                 @foreach (LoaiHang LoaiHangX in Model.DanhSachLoaiHang)
+                    {
+                        <tr class="table-primary" >
+                            <td scope="row">@LoaiHangX.MaLoaiHang</td>
+                            <td>@LoaiHangX.TenLoaiHang</td>
+                            <td>
+                                <button type="submit" class="btn btn-primary" onclick="location.href = '/MH_SuaLoaiHang?MaLoaiHangCanSua=@LoaiHangX.MaLoaiHang';">Sửa</button>
+                                <button type="submit" class="btn btn-primary" onclick="location.href = '/MH_XoaLoaiHang?MaLoaiHangCanXoa=@LoaiHangX.MaLoaiHang';">Xóa</button>
+                            </td>
+                        </tr>
+                    }
+            </tbody>
+            <tfoot>
+                
+            </tfoot>
+    </table>
+</div>

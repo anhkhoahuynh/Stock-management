@@ -1,0 +1,40 @@
+﻿
+@page
+@model QLSP.Pages.MH_TaoSanPhamModel
+
+@{
+
+}
+@using QLSP.Entities;
+
+@Model.ChuoiThongBao
+<form method="POST">
+
+  <label for="TenSanPhamX">Tên sản phẩm:</label><br>
+  <input type="text" id="TenSanPhamX" name="TenSanPhamX"><br>
+
+  <label for="NgaySanXuatX">Ngày sản xuất:</label><br>
+  <input type="date" id="NgaySanXuatX" name="NgaySanXuatX"><br>
+
+ <label for="HanSuDungX">Hạn sử dụng:</label><br>
+  <input type="date" id="HanSuDungX" name="HanSuDungX"><br>
+
+  <label for="NhaSanXuatX">Nhà sản xuất:</label><br>
+  <input type="text" id="NhaSanXuatX" name="NhaSanXuatX"><br>
+  <label for="MaLoaiHangX">Mã loại hàng:</label><br>
+  <select name="MaLoaiHangX" id="MaLoaiHangX">
+      @foreach (LoaiHang LoaiHangX in Model.DanhSachLoaiHang)
+       {
+        <option value="@LoaiHangX.MaLoaiHang">@LoaiHangX.MaLoaiHang - @LoaiHangX.TenLoaiHang</option>
+      }
+  </select>
+  
+
+   <label for="GiaX">Giá:</label><br>
+  <input type="number" id="GiaX" type="number" step="any" min=0 name="GiaX"><br>
+
+   <input type="submit" value="Tạo sản phẩm"/>
+
+
+</form>
+

@@ -1,0 +1,26 @@
+﻿@page
+@model QLSP.Pages.MH_DangNhapModel
+@{
+}
+
+@Model.ChuoiThongBao
+
+<form method="POST">
+    <div>
+    <p>Đăng nhập</p>
+</div>
+<div class="mb-3">
+  <label for="TenTaiKhoan" class="form-label">Ten Tai Khoan</label>
+  <input type="text"
+    class="form-control" name="TenTaiKhoan" id="TenTaiKhoan">
+</div>
+
+<div class="mb-3">
+  <label for="MatKhau" class="form-label">Mat Khau</label>
+  <input type="password"
+    class="form-control" name="MatKhau" id="MatKhau">
+</div>
+<div>
+    <button type="submit" class="btn btn-primary">Đăng nhập</button>
+</div>
+</form>
